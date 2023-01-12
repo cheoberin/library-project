@@ -13,17 +13,17 @@ public class Livro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String nome;
+    private String name;
     @ManyToMany
-    private List<Author> autores;
-    private int paginas;
+    private List<Author> authors;
+    private int pages;
     @ManyToMany
     private List<Genre> genres;
-    private int anoPublicacao;
+    private int publicationYear;
     private String asin;
-    private String resumo;
+    private String summary;
     @ManyToOne
     private Publisher publisher;
-    private String capaLivro;
+    private String bookCover;
 
 }
