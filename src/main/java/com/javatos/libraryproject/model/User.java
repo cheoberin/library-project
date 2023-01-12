@@ -9,9 +9,9 @@ import javax.persistence.InheritanceType;
 @Entity
 @Data
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Usuario extends Pessoa{
+public class User extends Person {
 
     private String role;
-    private String senha;
+    private String password;
 
 }

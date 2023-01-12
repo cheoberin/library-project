@@ -15,15 +15,15 @@ public class Livro {
     private long id;
     private String nome;
     @ManyToMany
-    private List<Autor> autores;
+    private List<Author> autores;
     private int paginas;
     @ManyToMany
-    private List<Genero> generos;
+    private List<Genre> genres;
     private int anoPublicacao;
     private String asin;
     private String resumo;
     @ManyToOne
-    private Editora editora;
+    private Publisher publisher;
     private String capaLivro;
 
 }

@@ -9,12 +9,12 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class Editora {
+public class Genre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String nome;
+    private String name;
 
 }
