@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Entity
 @Data
-public class Person {
+public abstract class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
