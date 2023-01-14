@@ -18,13 +18,6 @@ public class Person {
     private long id;
     private String name;
     private Date birthDate;
-
-    @CPF
-    private String cpf;
     private Date registerDate;
-    private String phone;
-    private String address;
-    @Email
-    private String email;
-
+    private String nationality;
 }
