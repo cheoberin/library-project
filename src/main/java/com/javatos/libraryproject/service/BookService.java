@@ -1,7 +1,9 @@
 package com.javatos.libraryproject.service;
 
 import com.javatos.libraryproject.model.Book;
+import com.javatos.libraryproject.repository.BookRepository;
 import com.javatos.libraryproject.resources.exceptions.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,20 +11,26 @@ import java.util.Optional;
 
 @Service
 public class BookService {
-    /*
+
+    private final BookRepository bookRepository;
+    @Autowired
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
+
     public Book findById(long id){
-        Optional<Book> book ; //TODO autorRepository.findById(id)
+        Optional<Book> book = bookRepository.findById(id);
         return book.orElseThrow(
                 () -> new ObjectNotFoundException("Object not Found: " + id + " , type: " +
-                        book.class.getName()));
+                        Book.class.getName()));
     }
 
     public List<Book> findAll(){
-        //TODO return autorRepository.findAll()
+        return bookRepository.findAll();
     }
 
     public Book create(Book book) {
-        //TODO setId(null); return autorRepository.save();
+         return bookRepository.save(book);
     }
 
     public Book update (long id, Book bookNew){
@@ -36,14 +44,13 @@ public class BookService {
         bookOriginal.setAuthors(bookNew.getAuthors());
         bookOriginal.setGenres(bookNew.getGenres());
         bookOriginal.setPublicationYear(bookOriginal.getPublicationYear());
-        //TODO return autorRepository.save(autorOriginal);
+
+        return bookRepository.save(bookOriginal);
     }
 
     public void delete(long id){
         findById(id);
-        //TODO autorRepository.deleteById(id)
+        bookRepository.deleteById(id);
     }
-
-    */
 
 }

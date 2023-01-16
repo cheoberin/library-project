@@ -1,40 +1,54 @@
 package com.javatos.libraryproject.service;
 
 import com.javatos.libraryproject.model.Publisher;
+import com.javatos.libraryproject.repository.PublisherRepository;
+import com.javatos.libraryproject.resources.exceptions.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PublisherService {
 
-   /*
+    private final PublisherRepository publisherRepository;
+
+    @Autowired
+    public PublisherService(PublisherRepository publisherRepository) {
+        this.publisherRepository = publisherRepository;
+    }
+
+
+
     public Publisher findById(long id){
-        Optional<Publisher> publisher ; //TODO autorRepository.findById(id)
+        Optional<Publisher> publisher = publisherRepository.findById(id);
         return publisher.orElseThrow(
                 () -> new ObjectNotFoundException("Object not Found: " + id + " , type: " +
-                        publisher.class.getName()));
+                        Publisher.class.getName()));
 
 
     }
 
 
     public List<Publisher> findAll(){
-        //TODO return editoraRepository.findAll()
+        return publisherRepository.findAll();
     }
 
 
     public Publisher create(Publisher publisher) {
-        //TODO setId(null); return editoraRepository.save();
+        return publisherRepository.save(publisher);
     }
 
     public Publisher update (long id, Publisher publisherNew){
         Publisher publisherOriginal = findById(id);
         publisherOriginal.setName(publisherNew.getName());
-        //TODO return editoraRepository.save(editoraOriginal);
+        return publisherRepository.save(publisherOriginal);
     }
 
     public void delete(long id){
         findById(id);
-        //TODO autorRepository.deleteById(id)
+        publisherRepository.deleteById(id);
     }
-    */
+
 }
