@@ -8,21 +8,21 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Data
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User extends Person {
 
     @Email
-    @NotNull
+    @NotBlank
     private String email;
 
-    @NotNull
+    @NotBlank
     private String password;
 
-    @NotNull
+    @NotBlank
     private String role;
     @CPF
     @Column(unique = true)
