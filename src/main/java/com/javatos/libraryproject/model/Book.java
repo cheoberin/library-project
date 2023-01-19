@@ -1,44 +1,49 @@
 package com.javatos.libraryproject.model;
 
-import lombok.Data;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 
-@Entity
-@Data
-public class Book {
+@Document
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@AllArgsConstructor
+public class Book implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @NotBlank
+    private String id;
+    @NotNull
     private String name;
     @NotNull
-    @ManyToMany
-    @Valid
+    @DBRef
+    @ToString.Exclude
     private List<Author> authors;
     @NotNull
     private int pages;
     @NotNull
-    @ManyToMany
-    @Valid
+    @DBRef
+    @ToString.Exclude
     private List<Genre> genres;
     @NotNull
     private int publicationYear;
-    @NotBlank
-    @Column(unique = true)
+    @NotNull
     private String asin;
-    @NotBlank
+    @NotNull
     private String summary;
     @NotNull
-    @ManyToOne
-    @Valid
+    @DBRef
     private Publisher publisher;
+
     private String bookCover;
+
 
 }
