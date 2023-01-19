@@ -18,7 +18,7 @@ public class GenreService {
         this.genreRepository = genreRepository;
     }
 
-    public Genre findById(long id){
+    public Genre findById(String id){
         Optional<Genre> genre = genreRepository.findById(id);
         return genre.orElseThrow(
                 () -> new ObjectNotFoundException("Object not Found: " + id + " , type: " +
@@ -36,13 +36,13 @@ public class GenreService {
         return genreRepository.save(genre);
     }
 
-    public Genre update (long id, Genre genreNew){
+    public Genre update (String id, Genre genreNew){
         Genre genreOriginal = findById(id);
         genreOriginal.setName(genreNew.getName());
         return genreRepository.save(genreOriginal);
     }
 
-    public void delete(long id){
+    public void delete(String id){
         findById(id);
         genreRepository.deleteById(id);
     }

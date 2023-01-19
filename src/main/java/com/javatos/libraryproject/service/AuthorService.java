@@ -20,7 +20,7 @@ public class AuthorService {
     }
 
 
-    public Author findById(long id){
+    public Author findById(String id){
         Optional<Author> author = authorRepository.findById(id);
 
         return author.orElseThrow(
@@ -36,7 +36,7 @@ public class AuthorService {
         return authorRepository.save(author);
     }
 
-    public Author update (long id, Author authorNew){
+    public Author update (String id, Author authorNew){
         Author authorOriginal = findById(id);
         authorOriginal.setName(authorNew.getName());
         authorOriginal.setNationality(authorNew.getNationality());
@@ -44,7 +44,7 @@ public class AuthorService {
         return authorRepository.save(authorOriginal);
     }
 
-    public void delete(long id){
+    public void delete(String id){
         findById(id);
         authorRepository.deleteById(id);
     }

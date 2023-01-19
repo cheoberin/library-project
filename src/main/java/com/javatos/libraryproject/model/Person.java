@@ -1,26 +1,32 @@
 package com.javatos.libraryproject.model;
 
-import lombok.Data;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.io.Serializable;
 
-@Entity
+import java.util.Date;
+import java.util.Objects;
+
+@Document
 @Data
-public abstract class Person {
+@SuperBuilder
+public abstract class Person implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
     @NotNull
     private String name;
-    @NotNull
+
     private Date birthDate;
-    @NotNull
+
     private Date registerDate;
-    @NotNull
+
     private String nationality;
+
+
 }

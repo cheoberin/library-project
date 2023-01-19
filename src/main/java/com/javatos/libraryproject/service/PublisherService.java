@@ -21,7 +21,7 @@ public class PublisherService {
 
 
 
-    public Publisher findById(long id){
+    public Publisher findById(String id){
         Optional<Publisher> publisher = publisherRepository.findById(id);
         return publisher.orElseThrow(
                 () -> new ObjectNotFoundException("Object not Found: " + id + " , type: " +
@@ -40,13 +40,13 @@ public class PublisherService {
         return publisherRepository.save(publisher);
     }
 
-    public Publisher update (long id, Publisher publisherNew){
+    public Publisher update (String id, Publisher publisherNew){
         Publisher publisherOriginal = findById(id);
         publisherOriginal.setName(publisherNew.getName());
         return publisherRepository.save(publisherOriginal);
     }
 
-    public void delete(long id){
+    public void delete(String id){
         findById(id);
         publisherRepository.deleteById(id);
     }

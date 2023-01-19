@@ -18,7 +18,7 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public Book findById(long id){
+    public Book findById(String id){
         Optional<Book> book = bookRepository.findById(id);
         return book.orElseThrow(
                 () -> new ObjectNotFoundException("Object not Found: " + id + " , type: " +
@@ -33,7 +33,7 @@ public class BookService {
          return bookRepository.save(book);
     }
 
-    public Book update (long id, Book bookNew){
+    public Book update (String id, Book bookNew){
         Book bookOriginal = findById(id);
         bookOriginal.setName(bookNew.getName());
         bookOriginal.setSummary(bookNew.getSummary());
@@ -48,7 +48,7 @@ public class BookService {
         return bookRepository.save(bookOriginal);
     }
 
-    public void delete(long id){
+    public void delete(String id){
         findById(id);
         bookRepository.deleteById(id);
     }
