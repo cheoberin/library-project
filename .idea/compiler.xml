@@ -9,8 +9,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
         <module name="auth" />
-        <module name="gateway" />
         <module name="library-registry" />
+        <module name="gateway" />
         <module name="service-discovery" />
       </profile>
     </annotationProcessing>
