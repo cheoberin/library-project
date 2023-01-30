@@ -1,8 +1,10 @@
 package com.atos.library.libraryregistry.service;
 
 
+import com.atos.library.libraryregistry.model.Author;
 import com.atos.library.libraryregistry.model.Book;
 import com.atos.library.libraryregistry.repository.BookRepository;
+import com.atos.library.libraryregistry.resources.exceptions.DataViolationException;
 import com.atos.library.libraryregistry.resources.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +33,11 @@ public class BookService {
     }
 
     public Book create(Book book) {
-         return bookRepository.save(book);
+        try {
+            return bookRepository.save(book);
+        }catch(Exception ex){
+            throw new DataViolationException("Error creating :" + Book.class.getName());
+        }
     }
 
     public Book update (Book bookNew){
