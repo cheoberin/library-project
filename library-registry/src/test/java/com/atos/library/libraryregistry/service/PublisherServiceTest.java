@@ -1,7 +1,8 @@
 package com.atos.library.libraryregistry.service;
 
 import com.atos.library.libraryregistry.model.Genre;
-import com.atos.library.libraryregistry.repository.GenreRepository;
+import com.atos.library.libraryregistry.model.Publisher;
+import com.atos.library.libraryregistry.repository.PublisherRepository;
 import com.atos.library.libraryregistry.resources.exceptions.DataViolationException;
 import com.atos.library.libraryregistry.resources.exceptions.ObjectNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,35 +16,35 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-class GenreServiceTest {
+class PublisherServiceTest {
 
-    public static final String ID = "stre7trtewyrtew212";
-    public static final String NAME = "Romance";
+    public static final String ID = "stre754677522r";
+    public static final String NAME = "Milenium";
 
     public static final String TESTID_INVALID = "testidInvalido";
 
     public static final String OBJECT_NOT_FOUND = "Object not Found: " + TESTID_INVALID + " , type: " +
-            Genre.class.getName();
+            Publisher.class.getName();
 
-    public static final String DATA_VIOLATION_MESSAGE = "Error creating :" + Genre.class.getName();
+    public static final String DATA_VIOLATION_MESSAGE = "Error creating :" + Publisher.class.getName();
+
 
     @InjectMocks
-    private GenreService genreService;
+    private PublisherService publisherService;
 
     @Spy
-    private GenreRepository genreRepository;
+    private PublisherRepository publisherRepository;
+
     @Mock
-    private Genre genre;
+    private Publisher publisher;
 
-    Optional<Genre> genreOptional;
-
+    Optional<Publisher> publisherOptional;
 
     @BeforeEach
     void setUp() {
@@ -52,13 +53,13 @@ class GenreServiceTest {
     }
 
     @Test
-    void whenFindByIdThenReturnAnGenreInstance() {
-        when(genreRepository.findById(anyString())).thenReturn(genreOptional);
+    void whenFindByIdThenReturnAnPublisherInstance() {
+        when(publisherRepository.findById(anyString())).thenReturn(publisherOptional);
 
-        Genre response = genreService.findById(ID);
+        Publisher response = publisherService.findById(ID);
 
         assertNotNull(response);
-        assertEquals(Genre.class,response.getClass());
+        assertEquals(Publisher.class,response.getClass());
         assertEquals(ID,response.getId());
 
 
@@ -68,7 +69,7 @@ class GenreServiceTest {
     void whenFindByIdThenReturnAnObjectNotFoundException(){
 
         try{
-            genreService.findById(TESTID_INVALID);
+            publisherService.findById(TESTID_INVALID);
         }
         catch(Exception ex){
             assertEquals(ObjectNotFoundException.class,ex.getClass());
@@ -79,14 +80,14 @@ class GenreServiceTest {
     }
 
     @Test
-    void whenFindAllThenReturnAListOfGenres() {
-        when(genreRepository.findAll()).thenReturn(List.of(genre));
+    void whenFindAllThenReturnAListOfPublishers() {
+        when(publisherRepository.findAll()).thenReturn(List.of(publisher));
 
-        List<Genre> response = genreService.findAll();
+        List<Publisher> response = publisherService.findAll();
 
         assertNotNull(response);
         assertEquals(1,response.size());
-        assertEquals(Genre.class,response.get(0).getClass());
+        assertEquals(Publisher.class,response.get(0).getClass());
         assertEquals(ID,response.get(0).getId());
 
     }
@@ -94,12 +95,12 @@ class GenreServiceTest {
 
     @Test
     void whenCreateThenReturnSuccess() {
-        when(genreRepository.save(any())).thenReturn(genre);
+        when(publisherRepository.save(any())).thenReturn(publisher);
 
-        Genre response = genreService.create(genre);
+       Publisher response = publisherService.create(publisher);
 
         assertNotNull(response);
-        assertEquals(Genre.class,response.getClass());
+        assertEquals(Publisher.class,response.getClass());
         assertEquals(ID,response.getId());
         assertEquals(NAME,response.getName());
 
@@ -107,10 +108,10 @@ class GenreServiceTest {
     @Test
     void whenCreateThenReturnDataViolationException() {
 
-        when(genreRepository.save(any())).thenThrow(new DataViolationException(DATA_VIOLATION_MESSAGE));
+        when(publisherRepository.save(any())).thenThrow(new DataViolationException(DATA_VIOLATION_MESSAGE));
 
         try {
-            genreService.create(genre);
+            publisherService.create(publisher);
         }catch (Exception ex){
             assertEquals(DataViolationException.class,ex.getClass());
             assertEquals(DATA_VIOLATION_MESSAGE,ex.getMessage());
@@ -119,13 +120,13 @@ class GenreServiceTest {
     }
     @Test
     void whenUpdateThenReturnSuccess() {
-        when(genreRepository.findById(anyString())).thenReturn(genreOptional);
-        when(genreRepository.save(any())).thenReturn(genre);
+        when(publisherRepository.findById(anyString())).thenReturn(publisherOptional);
+        when(publisherRepository.save(any())).thenReturn(publisher);
 
-        Genre response = genreService.update(genre);
+        Publisher response = publisherService.update(publisher);
 
         assertNotNull(response);
-        assertEquals(Genre.class,response.getClass());
+        assertEquals(Publisher.class,response.getClass());
         assertEquals(ID,response.getId());
         assertEquals(NAME,response.getName());
 
@@ -134,10 +135,10 @@ class GenreServiceTest {
 
     @Test
     void whenUpdateThenReturnObjectNotFound() {
-        when(genreRepository.findById(any())).thenThrow(new ObjectNotFoundException(OBJECT_NOT_FOUND));
+        when(publisherRepository.findById(any())).thenThrow(new ObjectNotFoundException(OBJECT_NOT_FOUND));
 
         try{
-            genreService.update(genre);
+            publisherService.update(publisher);
         }
         catch(Exception ex){
             assertEquals(ObjectNotFoundException.class,ex.getClass());
@@ -147,28 +148,29 @@ class GenreServiceTest {
 
     @Test
     void deleteWithSuccess() {
-        when(genreRepository.findById(anyString())).thenReturn(genreOptional);
-        doNothing().when(genreRepository).delete(any());
-        genreService.delete(ID);
-        verify(genreRepository,times(1)).deleteById(any());
+        when(publisherRepository.findById(anyString())).thenReturn(publisherOptional);
+        doNothing().when(publisherRepository).delete(any());
+        publisherService.delete(ID);
+        verify(publisherRepository,times(1)).deleteById(any());
 
     }
 
     @Test
     void deleteWithObjectNotFound() {
-        when(genreRepository.findById(any())).thenThrow(new ObjectNotFoundException(OBJECT_NOT_FOUND));
+        when(publisherRepository.findById(any())).thenThrow(new ObjectNotFoundException(OBJECT_NOT_FOUND));
 
         try{
-            genreService.delete(ID);
+            publisherService.delete(ID);
         }
         catch(Exception ex){
             assertEquals(ObjectNotFoundException.class,ex.getClass());
             assertEquals(OBJECT_NOT_FOUND,ex.getMessage());
         }
     }
+
     void initModels(){
-        genre = new Genre(ID, NAME);
-        genreOptional = Optional.of(new Genre(ID, NAME));
+        publisher = new Publisher(ID, NAME);
+        publisherOptional = Optional.of(new Publisher(ID, NAME));
 
     }
 }
