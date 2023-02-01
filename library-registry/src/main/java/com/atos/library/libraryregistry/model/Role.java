@@ -1,6 +1,7 @@
 package com.atos.library.libraryregistry.model;
 
 import lombok.*;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Entity;
@@ -24,6 +25,7 @@ public class Role {
 
     @Id
     private String id;
+    @Indexed(unique = true)
     private String name;
 
 //    ADMIN,
