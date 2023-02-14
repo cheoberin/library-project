@@ -34,16 +34,18 @@ public class LibraryRegistryApplication {
 //		userService.saveRole(new Role(null, "ADMIN"));
 //        userService.saveRole(new Role(null, "EMPLOYEE"));
 //        userService.saveRole(new Role(null, "CUSTOMER"));
-
+//        userService.saveUser(new User(null, "Admin", "admin@hotmail.com", "123456", new ArrayList<>()));
 //        userService.saveUser(new User(null, "Juliano Teste", "teste@teste.com", "123456", new ArrayList<>()));
 //        userService.saveUser(new User(null, "Juliano Vieira", "proprietyofkurd@hotmail.com", "123456", new ArrayList<>()));
+
 //
 
 //        userService.addRoleToUser("proprietyofkurd@hotmail.com", "ADMIN");
 //		userService.addRoleToUser("abcdddd@atos.net", "ADMIN2");
 //			userService.addRoleToUser("juliano.vieira@atos.net", "ADMIN");
 
-//        userService.addRoleToUser("abcdddd@atos.net", "ADMIN");
+//        userService.addRoleToUser("proprietyofkurd@hotmail.com", "ADMINNNNN");
+//			userService.addRoleToUser("proprietyofkurd@hotmail.com", "EMPLOYEE");
 //        userService.addRoleToUser("proprietyofkurd@hotmail.com", "EMPLOYEE");
 //        userService.addRoleToUser("proprietyofkurd@hotmail.com", "CUSTOMER");
 		};
