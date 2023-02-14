@@ -3,52 +3,58 @@ package com.atos.library.libraryregistry.controller;
 
 import com.atos.library.libraryregistry.model.Publisher;
 import com.atos.library.libraryregistry.service.PublisherService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @RequestMapping("/publisher")
 @Slf4j
 public class PublisherController {
-
-    private final PublisherService publisherService;
+    @Autowired
+    private PublisherService publisherService;
 
     @GetMapping("/{id}")
-    public Publisher findById(@PathVariable String id) {
-        return publisherService.findById(id);
+    public ResponseEntity<Publisher> findById(@PathVariable String id) {
+        Publisher publisher = publisherService.findById(id);
+        return ResponseEntity.ok().body(publisher);
     }
 
     @GetMapping
-    public List<Publisher> findAll() {
-        return publisherService.findAll();
+    public ResponseEntity<List<Publisher>> findAll() {
+        List<Publisher> publishers = publisherService.findAll();
+        return ResponseEntity.ok().body(publishers);
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public Publisher create(@Valid @RequestBody Publisher publisher) {
-        log.info("iniciando o cadastro de um editor: {}", publisher);
-        return publisherService.create(publisher);
+    public ResponseEntity<Publisher> create(@Valid @RequestBody Publisher publisher) {
+        Publisher publisherNew = publisherService.create(publisher);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(publisherNew.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable String id) {
-        log.warn("excluindo um editor");
+    public ResponseEntity<Publisher> delete(@PathVariable String id) {
+        log.warn("Deleting an publisher");
         publisherService.delete(id);
-        log.warn("editor excluido");
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @ResponseBody
-    public void Update(@PathVariable Publisher publisher) {
-        publisherService.update(publisher);
-        
+    public ResponseEntity<Publisher> update(@Valid @RequestBody Publisher publisher) {
+        Publisher publisherNew =  publisherService.update(publisher);
+        return ResponseEntity.ok().body(publisherNew);
     }
 }

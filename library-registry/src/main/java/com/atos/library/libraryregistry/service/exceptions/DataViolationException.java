@@ -1,4 +1,4 @@
-package com.atos.library.libraryregistry.resources.exceptions;
+package com.atos.library.libraryregistry.service.exceptions;
 
 public class DataViolationException extends RuntimeException{
 

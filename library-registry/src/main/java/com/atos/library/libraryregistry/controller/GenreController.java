@@ -3,52 +3,56 @@ package com.atos.library.libraryregistry.controller;
 
 import com.atos.library.libraryregistry.model.Genre;
 import com.atos.library.libraryregistry.service.GenreService;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @RequestMapping("/genre")
 @Slf4j
 public class GenreController {
 
-    private final GenreService genreService;
+    @Autowired
+    private GenreService genreService;
 
     @GetMapping("/{id}")
-    public Genre findById(@PathVariable String id) {
-        return genreService.findById(id);
+    public ResponseEntity<Genre> findById(@PathVariable String id) {
+        Genre genre = genreService.findById(id);
+        return ResponseEntity.ok().body(genre);
     }
 
     @GetMapping
-    public List<Genre> findAll() {
-        return genreService.findAll();
+    public ResponseEntity<List<Genre>> findAll() {
+        List<Genre> genres = genreService.findAll();
+        return ResponseEntity.ok().body(genres);
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public Genre create(@Valid @RequestBody Genre genre) {
-        log.info("iniciando o cadastro de um gênero: {}", genre);
-        return genreService.create(genre);
+    public ResponseEntity<Genre> create(@Valid @RequestBody Genre genre) {
+        Genre genreNew = genreService.create(genre);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(genreNew.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable String id) {
-        log.warn("excluindo um gênero");
+    public ResponseEntity<Genre> delete(@PathVariable String id) {
         genreService.delete(id);
-        log.warn("gênero excluido");
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @ResponseBody
-    public void Update(@PathVariable Genre genre) {
-        genreService.update(genre);
-        
+    public ResponseEntity<Genre> update(@Valid @RequestBody Genre genre) {
+       Genre genreNew = genreService.update(genre);
+       return ResponseEntity.ok().body(genreNew);
     }
 }

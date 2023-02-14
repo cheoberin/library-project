@@ -1,10 +1,9 @@
 package com.atos.library.libraryregistry.service;
 
-import com.atos.library.libraryregistry.model.Genre;
 import com.atos.library.libraryregistry.model.Publisher;
 import com.atos.library.libraryregistry.repository.PublisherRepository;
-import com.atos.library.libraryregistry.resources.exceptions.DataViolationException;
-import com.atos.library.libraryregistry.resources.exceptions.ObjectNotFoundException;
+import com.atos.library.libraryregistry.service.exceptions.DataViolationException;
+import com.atos.library.libraryregistry.service.exceptions.ObjectNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

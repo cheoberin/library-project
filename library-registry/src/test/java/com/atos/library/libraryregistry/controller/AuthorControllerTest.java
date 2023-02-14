@@ -9,6 +9,9 @@ import org.springframework.boot.actuate.health.SimpleHttpCodeStatusMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -39,7 +42,6 @@ class AuthorControllerTest {
     private AuthorController authorController;
     @Mock
     private AuthorService authorService;
-
     @Mock
     private Author author;
 
@@ -59,7 +61,6 @@ class AuthorControllerTest {
         assertEquals(author,response.getBody());
         assertEquals(HttpStatus.OK,response.getStatusCode());
         assertEquals(200,response.getStatusCodeValue());
-
     }
 
     @Test
@@ -91,6 +92,8 @@ class AuthorControllerTest {
 
     @Test
     void whenCreateThenReturnCreated() {
+
+
         when(authorService.create(any())).thenReturn(author);
         ResponseEntity<Author> response = authorController.create(author);
 

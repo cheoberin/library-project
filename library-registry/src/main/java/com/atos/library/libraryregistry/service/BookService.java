@@ -1,11 +1,10 @@
 package com.atos.library.libraryregistry.service;
 
 
-import com.atos.library.libraryregistry.model.Author;
 import com.atos.library.libraryregistry.model.Book;
 import com.atos.library.libraryregistry.repository.BookRepository;
-import com.atos.library.libraryregistry.resources.exceptions.DataViolationException;
-import com.atos.library.libraryregistry.resources.exceptions.ObjectNotFoundException;
+import com.atos.library.libraryregistry.service.exceptions.DataViolationException;
+import com.atos.library.libraryregistry.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
