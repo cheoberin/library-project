@@ -50,15 +50,30 @@ public class UserController {
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 
+    @GetMapping("/getUser/{username}")
+    public ResponseEntity<User>getUser(@PathVariable String username) {
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/save").toUriString());
+        return ResponseEntity.created(uri).body(userService.getUser(username));
+    }
+
     @PostMapping("/role/save")
     public ResponseEntity<Role>saveRole(@RequestBody Role role) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/role/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveRole(role));
     }
 
+    //---------------------- Add role ao usuário -------------------------
     @PostMapping("/role/addtouser")
     public ResponseEntity<?>addRoleToUser(@RequestBody RoleToUserForm form) {
+        String roleId = form.getRoleName();
+
         userService.addRoleToUser(form.getUsername(), form.getRoleName());
+
+
+//        userService.addRoleToUser(form.getUsername(), form.getRoleName().po );
+
+        //.findbyid()
+        //      .populate("bookId")
         return ResponseEntity.ok().build();
     }
 

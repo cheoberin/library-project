@@ -62,9 +62,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 //        System.out.println("Paoooooooooooooooooooooooooooo!!!!!!!!!!!!");
         log.info("Adding role {} to user {}", roleName, username);
         User user = userRepository.findByUsername(username);
-        System.out.println("Pao1: " + user.toString());
+//        System.out.println("Pao1: " + user.toString());
         Role role = roleRepository.findByName(roleName);
-        System.out.println("Paoooooooooooooooooooooooooooo!!!!!!!!!!!!" + role);
+//        System.out.println("Paoooooooooooooooooooooooooooo!!!!!!!!!!!!" + role);
         user.getRoles().add(role);
         userRepository.save(user);
     }

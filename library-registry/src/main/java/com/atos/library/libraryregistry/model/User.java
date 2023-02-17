@@ -30,7 +30,7 @@ import java.util.List;
 public class User implements Serializable {
 
     @Id
-    private String Id;
+    private String _id;
     private String name;
     @Indexed(unique = true)
     private String username;
