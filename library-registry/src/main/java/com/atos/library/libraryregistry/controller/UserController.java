@@ -62,18 +62,12 @@ public class UserController {
         return ResponseEntity.created(uri).body(userService.saveRole(role));
     }
 
-    //---------------------- Add role ao usuário -------------------------
+
     @PostMapping("/role/addtouser")
     public ResponseEntity<?>addRoleToUser(@RequestBody RoleToUserForm form) {
         String roleId = form.getRoleName();
-
         userService.addRoleToUser(form.getUsername(), form.getRoleName());
 
-
-//        userService.addRoleToUser(form.getUsername(), form.getRoleName().po );
-
-        //.findbyid()
-        //      .populate("bookId")
         return ResponseEntity.ok().build();
     }
 
@@ -103,7 +97,6 @@ public class UserController {
                 log.error("Error loggin in: {}", exception.getMessage());
                 response.setHeader("error", exception.getMessage());
                 response.setStatus(FORBIDDEN.value());
-//                    response.sendError(FORBIDDEN.value());
                 Map<String, String> error = new HashMap<>();
                 error.put("error_message", exception.getMessage());
                 response.setContentType(APPLICATION_JSON_VALUE);
@@ -113,8 +106,6 @@ public class UserController {
             throw new RuntimeException("Refresh token os missing");
         }
     }
-
-
 }
 
 @Data
