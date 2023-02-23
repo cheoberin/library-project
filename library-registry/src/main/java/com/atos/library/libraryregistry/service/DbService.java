@@ -1,20 +1,18 @@
 package com.atos.library.libraryregistry.service;
 
-import com.atos.library.libraryregistry.model.Author;
-import com.atos.library.libraryregistry.model.Book;
-import com.atos.library.libraryregistry.model.Genre;
-import com.atos.library.libraryregistry.model.Publisher;
-import com.atos.library.libraryregistry.repository.AuthorRepository;
-import com.atos.library.libraryregistry.repository.BookRepository;
-import com.atos.library.libraryregistry.repository.GenreRepository;
-import com.atos.library.libraryregistry.repository.PublisherRepository;
+import com.atos.library.libraryregistry.model.*;
+import com.atos.library.libraryregistry.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import com.atos.library.libraryregistry.service.UserService;
 
 @Service
 public class DbService {
@@ -30,6 +28,8 @@ public class DbService {
         this.bookRepository = bookRepository;
         this.genreRepository = genreRepository;
         this.publisherRepository = publisherRepository;
+//        this.userRepository = userRepository;
+//        this.userRepository = userRepository;
     }
 
 
@@ -55,6 +55,9 @@ public class DbService {
 
         Book book1 = new Book(null, "O pequeno príncipe", authors1, 103, genres2, 1943, "B0BPR1HQGX", "Um avião pousado no deserto com o motor avariado, um piloto com uma pequena quantidade de água, muito calor durante o dia e frio durante a noite", publisher1, "https://m.media-amazon.com/images/I/41yQ1HW1SwL.jpg");
 
+
+
+
         authorRepository.saveAll(List.of(author1));
 
         genreRepository.saveAll(List.of(genre1, genre2, genre3));
@@ -62,6 +65,30 @@ public class DbService {
         publisherRepository.saveAll(List.of(publisher1, publisher2));
 
         bookRepository.saveAll(List.of(book1));
+
+
+
+        // Add users and roles
+//        userServic .saveRole(new Role(null, "ADMIN"));
+//        userService.saveRole(new Role(null, "EMPLOYEE"));
+//        userService.saveRole(new Role(null, "CUSTOMER"));
+//
+//        userService.saveUser(new User(null, "Juliano Padoin Vieira", "juliano.vieira@atos.net", "123456", new ArrayList<>()));
+//        userService.saveUser(new User(null, "A1", "proprietyofkurd@hotmail.com", "123456", new ArrayList<>()));
+//
+//        userService.addRoleToUser("juliano.vieira@atos.net", "ADMIN");
+//        userService.addRoleToUser("juliano.vieira@atos.net", "EMPLOYEE");
+//        userService.addRoleToUser("proprietyofkurd@hotmail.com", "EMPLOYEE");
+//        userService.addRoleToUser("proprietyofkurd@hotmail.com", "CUSTOMER");
+
+
+//        Role role1 = new Role (null, "Admin");
+//        Role role2 = new Role (null, "Employee");
+//        Role role3 = new Role (null, "User");
+//        User user1 = new User(null, "Abbbb", "DbService", "123456", List.of(role1, role2));
+//        userRepository.saveAll(List.of(user1));
+
+
     }
 
 

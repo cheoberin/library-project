@@ -17,9 +17,9 @@ public class DevConfig {
         this.dbService = dbService;
     }
 
-  //  @Bean
-   // public void initDB(){
-     //   this.dbService.initDataBaseTest();
-   // }
+    @Bean
+    public void initDB(){
+        this.dbService.initDataBaseTest();
+    }
 
 }
