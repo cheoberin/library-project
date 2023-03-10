@@ -2,7 +2,6 @@ package com.atos.library.libraryregistry.controller.exceptions;
 
 import com.atos.library.libraryregistry.service.exceptions.DataViolationException;
 import com.atos.library.libraryregistry.service.exceptions.ObjectNotFoundException;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -14,7 +13,8 @@ import org.springframework.mock.web.MockHttpServletRequest;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 class ResourceExceptionHandlerTest {

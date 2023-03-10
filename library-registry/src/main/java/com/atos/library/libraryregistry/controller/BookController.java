@@ -1,12 +1,15 @@
 package com.atos.library.libraryregistry.controller;
 
 
-import com.atos.library.libraryregistry.service.BookService;
 import com.atos.library.libraryregistry.model.Book;
+import com.atos.library.libraryregistry.service.BookService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -50,7 +53,7 @@ public class BookController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping()
     public ResponseEntity<Book> update(@Valid @RequestBody Book newBook) {
         Book book = bookService.update(newBook);
         return ResponseEntity.ok().body(book);

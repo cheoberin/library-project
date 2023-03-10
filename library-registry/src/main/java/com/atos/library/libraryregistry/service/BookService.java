@@ -6,6 +6,7 @@ import com.atos.library.libraryregistry.repository.BookRepository;
 import com.atos.library.libraryregistry.service.exceptions.DataViolationException;
 import com.atos.library.libraryregistry.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
+    @Cacheable(value="cacheFindBook",key="#id")
     public Book findById(String id){
         Optional<Book> book = bookRepository.findById(id);
         return book.orElseThrow(
@@ -27,6 +29,7 @@ public class BookService {
                         Book.class.getName()));
     }
 
+    @Cacheable(value="cacheFindBooks")
     public List<Book> findAll(){
         return bookRepository.findAll();
     }

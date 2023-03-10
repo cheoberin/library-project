@@ -1,7 +1,7 @@
 package com.atos.library.libraryregistry.service;
 
-import com.atos.library.libraryregistry.model.User;
 import com.atos.library.libraryregistry.model.Role;
+import com.atos.library.libraryregistry.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

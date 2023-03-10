@@ -1,18 +1,20 @@
 package com.atos.library.libraryregistry.service;
 
-import com.atos.library.libraryregistry.model.*;
-import com.atos.library.libraryregistry.repository.*;
+import com.atos.library.libraryregistry.model.Author;
+import com.atos.library.libraryregistry.model.Book;
+import com.atos.library.libraryregistry.model.Genre;
+import com.atos.library.libraryregistry.model.Publisher;
+import com.atos.library.libraryregistry.repository.AuthorRepository;
+import com.atos.library.libraryregistry.repository.BookRepository;
+import com.atos.library.libraryregistry.repository.GenreRepository;
+import com.atos.library.libraryregistry.repository.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
-import com.atos.library.libraryregistry.service.UserService;
 
 @Service
 public class DbService {
